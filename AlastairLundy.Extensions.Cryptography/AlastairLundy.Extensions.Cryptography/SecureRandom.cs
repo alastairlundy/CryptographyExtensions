@@ -65,19 +65,20 @@ public class SecureRandom
     }
 
     /// <summary>
-    /// Fills an array with a given number of randomly selected items from the available choices.
+    /// Fills an IEnumerable with a given number of randomly selected items from the available choices.
     /// </summary>
     /// <param name="choices">The choices to select items from.</param>
     /// <param name="length">The number of items to be randomly selected.</param>
-    /// <typeparam name="T">The type of items in the array</typeparam>
-    /// <returns>an array with a given number of randomly selected items from the available choices.</returns>
-    public T[] GetItems<T>(T[] choices, int length)
+    /// <typeparam name="T">The type of items in the IEnumerable</typeparam>
+    /// <returns>an IEnumerable with a given number of randomly selected items from the available choices.</returns>
+    public IEnumerable<T> GetItems<T>(IEnumerable<T> choices, int length)
     {
+        T[] enumerable = choices as T[] ?? choices.ToArray();
         T[] output = new T[length];
 
         for (int i = 0; i < length; i++)
         {
-            output[length] = choices[Next(0, choices.Length)];
+            output[length] = enumerable[Next(0, enumerable.Length)];
         }
 
         return output;
@@ -93,6 +94,15 @@ public class SecureRandom
        values = values.ToArray().OrderBy(x => Next()).ToArray();
     }
 
+    /// Randomly shuffles an IEnumerable of items.
+    /// </summary>
+    /// <param name="values">The items to be shuffled.</param>
+    /// <typeparam name="T">The type of item in the IEnumerable.</typeparam>
+    public void Shuffle<T>(IEnumerable<T> values)
+    {
+        values = values.OrderBy(x => Next());
+    }
+    
     /// <summary>
     /// Randomly shuffles an array of items.
     /// </summary>
