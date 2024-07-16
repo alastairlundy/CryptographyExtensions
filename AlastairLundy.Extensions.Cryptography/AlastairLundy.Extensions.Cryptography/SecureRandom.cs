@@ -141,7 +141,7 @@ public class SecureRandom
     /// <returns>a random integer between 0 and int.MaxValue .</returns>
     public int Next()
     {
-        return RandomNumberGenerator.GetInt32(0, int.MaxValue);
+        return Next(0, int.MaxValue);
     }
 
     /// <summary>
@@ -153,11 +153,11 @@ public class SecureRandom
     {
         if (maxValue > 0)
         {
-            return RandomNumberGenerator.GetInt32(0, maxValue);
+            return Next(0, maxValue);
         }
         else
         {
-            return RandomNumberGenerator.GetInt32(int.MinValue, maxValue);
+            return Next(int.MinValue, maxValue);
         }
     }
 
