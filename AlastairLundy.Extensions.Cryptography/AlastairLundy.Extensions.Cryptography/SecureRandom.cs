@@ -24,6 +24,8 @@
 
 
 using System.Security.Cryptography;
+using System.Text;
+
 // ReSharper disable IntroduceOptionalParameters.Global
 
 namespace AlastairLundy.Extensions.Cryptography;
@@ -94,6 +96,7 @@ public class SecureRandom
        values = values.ToArray().OrderBy(x => Next()).ToArray();
     }
 
+    /// <summary>
     /// Randomly shuffles an IEnumerable of items.
     /// </summary>
     /// <param name="values">The items to be shuffled.</param>
@@ -216,7 +219,53 @@ public class SecureRandom
     /// <returns>the randomly generated 64 Bit integer.</returns>
     public long NextInt64(long minValue, long maxValue)
     {
-        return Convert.ToInt64(NextDouble(Convert.ToDouble(minValue), Convert.ToDouble(maxValue)));
+        bool generateUpperValue = (maxValue == int.MaxValue) || (maxValue > 999_999_999) || (Next(1, 2) == 2);
+        
+        int numberOfDigits;
+
+        int maxValLength = maxValue.ToString().Length;
+        
+        if (generateUpperValue)
+        {
+            if (maxValLength > 19)
+            {
+                numberOfDigits = Next(1, 19);
+            }
+            else
+            {
+                numberOfDigits = Next(1, maxValLength);
+            }
+        }
+        else
+        {
+            numberOfDigits = Next(1, 9);
+        }
+
+        StringBuilder number = new StringBuilder();
+
+        for (int i = 0; i < numberOfDigits; i++)
+        {
+            number.Append(Next(0, 9));
+        }
+
+        long finalNumber = long.Parse(number.ToString());
+
+        if (finalNumber < minValue)
+        {
+            while (finalNumber < minValue)
+            {
+                finalNumber = finalNumber * 2;
+            }
+        }
+        if (finalNumber > maxValue)
+        {
+            while (finalNumber > maxValue)
+            {
+                finalNumber = finalNumber / 2;
+            }
+        }
+
+        return finalNumber;
     }
     
     /// <summary>
