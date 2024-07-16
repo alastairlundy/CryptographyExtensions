@@ -104,7 +104,7 @@ public class SecureRandom
     }
     
     /// <summary>
-    /// 
+    /// Generates a random number as a byte.
     /// </summary>
     /// <returns></returns>
     public byte NextByte()
@@ -173,9 +173,9 @@ public class SecureRandom
     }
 
     /// <summary>
-    /// 
+    /// Returns a random 64 Bit integer that is non-negative.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>the randomly generated 64 Bit integer.</returns>
     public long NextInt64()
     {
         return NextInt64(0, long.MaxValue);
