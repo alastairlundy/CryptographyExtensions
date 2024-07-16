@@ -5,6 +5,14 @@
         <Nullable>enable</Nullable>
         <TargetFrameworks>net8.0;net6.0</TargetFrameworks>
         <LangVersion>default</LangVersion>
+        <Title>AlastairLundy.Extensions.Cryptography</Title>
+        <Authors>AlastairLundy</Authors>
+        <Description> Extensions to make working with C# Cryptography classes easier to use. </Description>
+        <Copyright>Copyright (c) Alastair Lundy 2024 </Copyright>
+        <RepositoryUrl>https://github.com/alastairlundy/CryptographyExtensions</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageReleaseNotes>Initial Release</PackageReleaseNotes>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
 </Project>
