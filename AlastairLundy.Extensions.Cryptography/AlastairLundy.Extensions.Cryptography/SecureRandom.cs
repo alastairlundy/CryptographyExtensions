@@ -178,7 +178,7 @@ public class SecureRandom
     /// <returns></returns>
     public long NextInt64()
     {
-        return NextInt64(0, long.MinValue);
+        return NextInt64(0, long.MaxValue);
     }
 
     /// <summary>
